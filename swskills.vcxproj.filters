@@ -26,5 +26,8 @@
     <ClCompile Include="mario.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="newcity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
