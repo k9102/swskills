@@ -67,30 +67,20 @@ pair<int, int> NextRound(int s,int e)
 
 
 
-int main() {
+int main() 
+{
 	int ans = -1;
 
-	InputData();			//	입력 함수
+	InputData();
 
-	//	코드를 작성하세요
 
 	sort(A, A+N, [](const st& a, const st& b) { return (a.X < b.X);  });
 	
-	//for (int i = 0; i < N; i++)
-	//{
-	//	cout << A[i].X << endl;
-	//}
 
 	for (int i = 0; i < N; i++)
 	{
 		ids.insert(A[i].ID);
 	}
-
-	for (int i : ids)
-	{
-		m[i] = 0;
-	}
-
 
 	int min = INT16_MAX;
 
