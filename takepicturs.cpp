@@ -26,21 +26,46 @@ void InputData() {
 set<int> ids;
 map<int, int> m;
 
-int GetSize(int start)
+pair<int,int> FirstRound()
 {
 	set<int> rec;
 
-	for (int i = start; i < N;i++)
+	for (int i = 0; i < N;i++)
 	{
+		m[A[i].ID]++;
 		rec.insert(A[i].ID);
 		if (rec.size() == ids.size())
 		{
-			return A[i].X - A[start].X;
+			return { i,A[i].X - A[0].X };
 		}
 	}
 
-	return INT16_MAX;
+	return { -1,INT16_MAX };
 }
+
+pair<int, int> NextRound(int s,int e)
+{
+	m[A[s].ID]--;
+	if (m[A[s].ID] == 0)
+	{
+		for (int i=e+1; i < N; i++)
+		{
+			m[A[i].ID]++;
+			if (A[i].ID == A[s].ID)
+			{
+				return { i,A[i].X - A[s + 1].X };
+			}
+		}
+
+		return { -1,INT16_MAX };
+	}
+	else
+	{
+		return { e, A[e].X - A[s+1].X };
+	}
+}
+
+
 
 int main() {
 	int ans = -1;
@@ -68,12 +93,18 @@ int main() {
 
 
 	int min = INT16_MAX;
+
+	int e, dist;
+	tie(e,dist) = FirstRound();
+	min = dist;
 	for (int i=0;i<N;i++)
 	{
-		int size = GetSize(i);
-		if (min > size)
+		tie(e, dist) = NextRound(i,e);
+		if (e == -1)
+			break;
+		else
 		{
-			min = size;
+			if (min > dist) min = dist;
 		}
 	}
 
