@@ -1,6 +1,7 @@
 
 #include "pch.h"
 #include <iostream>
+#include <stdlib.h>
 using namespace std;
 
 int N;//제품 수
@@ -15,7 +16,16 @@ void InputData() {
 	}
 }
 
-int seq[9];
+
+void InputData_() {
+	int i;
+	N = 100000;
+	M = 9;
+	for (i = 1; i <= N; i++) {
+		ID[i] = (rand() % M) + 1;
+	}
+}
+
 int sel[9] = {};
 int nums[9+1] = {};
 
@@ -30,28 +40,11 @@ template<int N> void print(int (&x)[N])
 
 int min_val = 1000000;
 
-int CalMove(int *seq)
-{
-	int cur = 1;
-	int mv = 0;
-	for (int i = 0; i < M; i++)
-	{
-		for (int j = 0; j < nums[seq[i]]; j++)
-		{
-			if (ID[cur++] != seq[i])
-			{
-				mv++;
-			}
-		}
-	}
-	return mv;
-}
 
-void permute(int d)
+void permute(int d,int cur,int mv)
 {
 	if (d == M)
 	{
-		int mv = CalMove(seq);
 		if (mv < min_val)
 		{
 			min_val = mv;
@@ -63,10 +56,22 @@ void permute(int d)
 		{
 			if (sel[i] == 0)
 			{
-				seq[d] = i+1;
-				
+				int nx_mv = mv;
+				int nx_cur = cur;
+
+	
+				for (int j = 0; j < nums[i + 1]; j++)
+				{
+					if (ID[nx_cur++] != i + 1)
+					{
+						nx_mv++;
+					}
+				}
+
+				if (nx_mv > min_val) continue;
+
 				sel[i] = 1;
-				permute(d+1);
+				permute(d+1,nx_cur, nx_mv);
 				sel[i] = 0;
 			}
 		}
@@ -77,7 +82,7 @@ void permute(int d)
 int main() {
 	int ans = -1;
 
-	InputData();//입력 함수
+	InputData_();//입력 함수
 
 	for (int i = 1; i <=N; i++)
 	{
@@ -86,7 +91,7 @@ int main() {
 
 	
 	//	코드를 작성하세요
-	permute(0);
+	permute(0,1,0);
 
 	ans = min_val;
 
