@@ -35,5 +35,8 @@
     <ClCompile Include="hacker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="clearance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
