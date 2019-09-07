@@ -63,7 +63,7 @@ void permute(int d,int cur,int mv)
 				int nx_mv = mv;
 				int nx_cur = cur;
 
-				int k = (sel<<10)|(d*10+(i+1));
+				int k = (sel<<8)|((d<<4)+i);
 				if(C.find(k)==end(C))
 				{
 					for (int j = 0; j < nums[i + 1]; j++)
@@ -95,7 +95,7 @@ void permute(int d,int cur,int mv)
 int main() {
 	int ans = -1;
 
-	InputData();//占쌉뤄옙 占쌉쇽옙
+	InputData_();//占쌉뤄옙 占쌉쇽옙
 
 	for (int i = 1; i <=N; i++)
 	{

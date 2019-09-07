@@ -259,3 +259,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+exe.out.dSYM/Contents/Info.plist
+exe.out.dSYM/Contents/Resources/DWARF/exe.out
+exe.out
