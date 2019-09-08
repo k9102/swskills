@@ -8,7 +8,7 @@
             "args": [
                 "-std=c++17",
                 "-stdlib=libc++",
-                "clearance.cpp",
+                "logistics.cpp",
                 "-o",
                 "exe.out",
                 "--debug"
