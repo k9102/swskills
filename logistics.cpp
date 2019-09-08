@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits.h>
 using namespace std;
 
 int N, M;                      //공장 수, 도로 정보 수
@@ -67,48 +68,44 @@ int main()
       
         InitNode(N);
 
-        int nn = i;
-        node[nn].visited = true;
-        node[nn].dist = 0;
+        node[i].dist = 0;
 
-        bool done;
-        do
+        for(int loop=0;loop<N;loop++)
         {
-            done = true;
-            for (int j = 0; j < N; j++)
-            {
-                if (!node[j].visited)
-                {
-                    int key = Hash(nn, j);
-                    if (d_map.find(key) != end(d_map))
-                    {
-                        int dist = d_map[key] + node[nn].dist;
-                        if (dist < node[j].dist)
-                        {
-                            node[j].dist = dist;
-                        }
-                    }
-                    done = false;
-                }
-            }
-            if(!done)
+            int shortest;
             {
                 int min_val = INT_MAX;
-
                 for(int j=0;j<N;j++)
                 {
                     if(!node[j].visited)
                     {
                         if(min_val > node[j].dist) {
                             min_val = node[j].dist;
-                            nn = j;
+                            shortest = j;
                         }
                     }
                 }
-
-                node[nn].visited = true;
             }
-        } while (!done);
+
+            node[shortest].visited = true;
+
+
+            for (int j = 0; j < N; j++)
+            {
+                if (!node[j].visited)
+                {
+                    int key = Hash(shortest, j);
+                    if (d_map.find(key) != end(d_map))
+                    {
+                        int dist = d_map[key] + node[shortest].dist;
+                        if (dist < node[j].dist)
+                        {
+                            node[j].dist = dist;
+                        }
+                    }
+                }
+            }
+        } 
 
         for(int j=0;j<N;j++)
         {
