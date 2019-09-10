@@ -38,5 +38,11 @@
     <ClCompile Include="clearance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="logistics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="roof.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
