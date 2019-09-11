@@ -34,7 +34,6 @@ bool InPt(int y,int x) {
 
 void traverse(int y,int x,int dir)
 {
-	cout << y <<" "<< x <<endl;
 	for (int i = 0; i < 3; i++)
 	{
 		dir = ++dir % 4;
@@ -43,11 +42,15 @@ void traverse(int y,int x,int dir)
 		nx += x;
 
 		if (!InPt(ny, nx)) continue;
+		int nval = road[y][x] + (map[ny][nx] - '0');
 
-		if (road[ny][nx]==INT_MAX || road[ny][nx] > road[y][x] + map[ny][nx])
+		if (road[ny][nx]==INT_MAX || road[ny][nx] > nval)
 		{
-			road[ny][nx] = road[y][x] + (map[y][x]-'0');
-			traverse(ny, nx, ndir[dir]);
+			if (nval < road[N - 1][N - 1])
+			{
+				road[ny][nx] = nval;
+				traverse(ny, nx, ndir[dir]);
+			}
 		}
 	}
 	
