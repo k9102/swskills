@@ -44,5 +44,8 @@
     <ClCompile Include="roof.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="roadconstruction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
