@@ -54,6 +54,8 @@ void InputData() {
 	cin >> B >> S >> D;
 }
 
+
+#include <algorithm>
 vector<vector<int>> vec_r;
 vector<int> vec_s;
 int main() {
@@ -70,22 +72,22 @@ int main() {
 		sign = sign_s * sign_d;
 
 		
-		int ri = 0;
+		int s_col = 0; /*start column*/
 		int row = 0;
 		int max_rlen = 0;
 		for (int i = dl - 1; i >= 0; i--, row++)
 		{
-			int t = ri++;
+			int col = s_col++;
 			int c = 0;
 			for (int j = sl - 1; j >= 0; j--)
 			{
 				int tmp = c + s[j] * d[i];
 				c = tmp / B;
-				r[row][t++] += tmp % B;
+				r[row][col++] += tmp % B;
 			}
-			if (c != 0) r[row][t++] = c;
+			if (c != 0) r[row][col++] = c;
 
-			max_rlen = (t > max_rlen) ? t : max_rlen;
+			max_rlen = (col > max_rlen) ? col : max_rlen;
 		}
 
 		int c = 0;
@@ -111,26 +113,15 @@ int main() {
 
 	for (int i = 0; i < vec_r.size(); i++)
 	{
-		int k = 0;
-		for (; k < vec_r[i].size(); k++)
-		{
-			if (vec_r[i][k] != 0) break;
-		}
-
-		if(k==vec_r[i].size())
+		if (all_of(begin(vec_r[i]), end(vec_r[i]), [](auto &r) { return r == 0; }))
 		{
 			cout << 0;
 		}
 		else {
-			bool leading=true;
 			cout << (vec_s[i] >= 0 ? "" : "-");
 			for (int j = vec_r[i].size() - 1; j >= 0; j--)
 			{
-				if (leading && vec_r[i][j] == 0) continue;
-				
-				leading = false;
-				cout << N2D(vec_r[i][j]);
-				
+				cout << N2D(vec_r[i][j]);			
 			}
 		}
 		cout << endl;
