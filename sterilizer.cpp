@@ -30,7 +30,7 @@ int main(void) {
 	Input();
 
 	//	코드를 작성하세요
-	int fl_x, fl_y;
+	int fl_x, fl_y; /*filter length*/
 	int fl = L / 2;
 	int max_cnt = 0;
 	for (int i = 1; i < fl; i++)
@@ -43,8 +43,12 @@ int main(void) {
 			int X = x[n];
 			int Y = y[n];
 
-			int cnt = GermsInRect(x[n], y[n], fl_x, fl_y);
-			if (cnt > max_cnt) max_cnt = cnt;
+			for(int iy=y[n];iy>=y[n]-fl_y;iy--)
+				for (int ix = x[n]; ix >= x[n] - fl_x; ix--)
+				{
+					int cnt = GermsInRect(ix, iy, fl_x, fl_y);
+					if (cnt > max_cnt) max_cnt = cnt;
+				};
 		}
 
 	}
@@ -54,3 +58,14 @@ int main(void) {
 
 	return 0;
 }
+/*
+6 10 6
+2 2
+4 6
+5 2
+6 4
+2 4
+3 3
+
+4
+*/
