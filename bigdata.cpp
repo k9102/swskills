@@ -50,18 +50,18 @@ void Solve() {
 		int i = 0;
 		while( acc < N / 2  && i < tbl.size())
 		{
-			const auto p = tbl[i++];
+			const auto &[name,vec] = tbl[i++];
 
-			if (p.second.size() < 2)
+			if (vec.size() < 2)
 				break;
 
-			cout << p.first;
-			for (int j = 0; j < p.second.size(); j++)
+			cout << name;
+			for (int j = 0; j < vec.size(); j++)
 			{
-				cout << " " <<p.second[j];
+				cout << " " <<vec[j];
 			}
 			cout << endl;
-			acc += p.second.size();
+			acc += vec.size();
 		}
 		
 	}
