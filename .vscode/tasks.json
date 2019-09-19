@@ -8,7 +8,7 @@
             "args": [
                 "-std=c++17",
                 "-stdlib=libc++",
-                "logistics.cpp",
+                "servicecenter.cpp",
                 "-o",
                 "exe.out",
                 "--debug"
