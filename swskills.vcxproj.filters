@@ -62,5 +62,11 @@
     <ClCompile Include="asset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="autonomousdriving.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="servicecenter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
