@@ -8,7 +8,7 @@ int W;//가로크기
 char map[500][510];//지도
 int cost[500][510]={};
 
-#define DEBUG
+//#define DEBUG
 
 void input_data(){
 	int i;
