@@ -77,5 +77,8 @@
     <ClCompile Include="takeawalk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="smartfactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
