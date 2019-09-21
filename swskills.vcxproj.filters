@@ -74,5 +74,8 @@
     <ClCompile Include="treedepth.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="takeawalk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
