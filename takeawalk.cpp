@@ -40,11 +40,11 @@ int main() {
 		}
 	}
 	
-	int nearest_loc = INT_MAX;
+	long long nearest_loc = LLONG_MAX;
 	int grp = 0;
 	for_each(rbegin(spd_), rend(spd_), [&nearest_loc,&grp](auto speed) {
 		auto[p, s] = speed;
-		auto loc = p + s * T;
+		long long loc = p + (long long)s * T;
 
 		if (loc < nearest_loc)
 		{
