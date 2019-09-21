@@ -2,6 +2,8 @@
 #include <iostream>
 #include <algorithm>
 #include <limits.h>
+#include <tuple>
+
 using namespace std;
 int H;//세로크기
 int W;//가로크기
@@ -35,28 +37,38 @@ int called=0;
 
 int mv[4][2] = { {-1,0},{0,1},{1,0},{0,-1} };
 
-void Traverse(int x,int y)
-{
-#ifdef DEBUG
-    called ++;
-#endif
-  
-    for(int i=0;i<4;i++)
-    {
-        int nx = x+mv[i][0];
-        int ny = y+mv[i][1];
+#include <stack>
 
-		if (GetM(nx, ny) == 'X') continue;
-		int ncost = cost[y][x] + 1;
-		if(cost[ny][nx] > ncost)
-        {
-			cost[ny][nx] = ncost;
-			if (ncost < cost[H - 1][W - 1])
+stack<tuple<int, int, int>> stk;
+
+void Traverse()
+{
+	while (!stk.empty())
+	{
+		int x, y, i;
+		tie(x, y, i) = stk.top(); stk.pop();
+		
+		for(;i < 4;i++)
+		{
+			int nx = x + mv[i][0];
+			int ny = y + mv[i][1];
+
+			if (GetM(nx, ny) == 'X') continue;
+			int ncost = cost[y][x] + 1;
+			if (cost[ny][nx] > ncost)
 			{
-				Traverse(nx, ny);
+				cost[ny][nx] = ncost;
+				if (ncost < cost[H - 1][W - 1])
+				{
+					stk.push({ x,y,i+1});
+					
+					i = -1;
+					x = nx;
+					y = ny;
+				}
 			}
-        }
-    }
+		}
+	}
 }
 
 int main(){
@@ -68,14 +80,13 @@ int main(){
 	//	코드를 작성하세요
 
 	cost[0][0] = 0;
-    Traverse(0,0);
+	stk.push({ 0,0,0});
+    Traverse();
 
     ans = cost[H-1][W-1];
     if(ans==INT_MAX) ans = -1;
 	cout << ans << endl;
-#ifdef DEBUG
-    cout << called << endl;
-#endif
+
 	return 0;
 }
 
