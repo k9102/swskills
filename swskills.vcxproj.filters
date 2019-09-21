@@ -68,5 +68,8 @@
     <ClCompile Include="servicecenter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="suspect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
