@@ -8,7 +8,7 @@ int W;//가로크기
 char map[500][510];//지도
 int cost[500][510]={};
 
-//#define DEBUG
+#define DEBUG
 
 void input_data(){
 	int i;
@@ -33,14 +33,29 @@ char GetM(int x,int y)
 
 int called=0;
 
-int mv[4][2] = { {-1,0},{0,1},{1,0},{0,-1} };
+int mv[4][2] = { {1,0},{0,1},{-1,0},{0,-1} };
 
+template<typename T> void Print(T &tbl, int w, int h)
+{
+
+	for (int i = 0; i < h; i++)
+	{
+		for (int j = 0; j < w; j++)
+		{
+			int v = tbl[i][j];
+			if (v == INT_MAX) v = 0;
+			cout << v << ",";
+		}
+		cout << endl;
+	}
+	cout << endl;
+}
 void Traverse(int x,int y)
 {
 #ifdef DEBUG
-    called ++;
+    called ++;	
+	Print(cost, W, H);
 #endif
-  
     for(int i=0;i<4;i++)
     {
         int nx = x+mv[i][0];
@@ -51,7 +66,7 @@ void Traverse(int x,int y)
 		if(cost[ny][nx] > ncost)
         {
 			cost[ny][nx] = ncost;
-			if (ncost < cost[H - 1][W - 1])
+			if (ncost+(W-nx-1)+(H-ny-1) < cost[H - 1][W - 1])
 			{
 				Traverse(nx, ny);
 			}
@@ -69,7 +84,9 @@ int main(){
 
 	cost[0][0] = 0;
     Traverse(0,0);
-
+#ifdef DEBUG
+	Print(cost, W, H);
+#endif
     ans = cost[H-1][W-1];
     if(ans==INT_MAX) ans = -1;
 	cout << ans << endl;
