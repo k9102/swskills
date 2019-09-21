@@ -19,11 +19,8 @@ void Input_Data() {
 	}
 }
 
-enum {DN,DW,DS,DE};
 
 pair<int, int> mv[4] = { {-1,0},{0,1},{1,0},{0,-1} };
-
-int ndir[4] = { 2,3,0,1 };
 
 bool InPt(int y,int x) {
 	if (y >= 0 && y < N && x >= 0 && x < N)
@@ -32,24 +29,23 @@ bool InPt(int y,int x) {
 	return false;
 }
 
-void traverse(int y,int x,int dir)
+void traverse(int y,int x)
 {
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 4; i++)
 	{
-		dir = ++dir % 4;
-		auto [ny, nx] = mv[dir];
+		auto [ny, nx] = mv[i];
 		ny += y;
 		nx += x;
 
 		if (!InPt(ny, nx)) continue;
 		int nval = road[y][x] + (map[ny][nx] - '0');
 
-		if (road[ny][nx]==INT_MAX || road[ny][nx] > nval)
+		if (road[ny][nx] > nval)
 		{
 			if (nval < road[N - 1][N - 1])
 			{
 				road[ny][nx] = nval;
-				traverse(ny, nx, ndir[dir]);
+				traverse(ny, nx);
 			}
 		}
 	}
@@ -70,7 +66,7 @@ int main() {
 
 	}
 	road[0][0] = 0;
-	traverse(0,0,DE);
+	traverse(0,0);
 
 	ans = road[N - 1][N - 1];
 	cout << ans << endl;	//	정답 출력
