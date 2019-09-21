@@ -8,6 +8,8 @@ int W;//가로크기
 char map[500][510];//지도
 int cost[500][510]={};
 
+//#define DEBUG
+
 void input_data(){
 	int i;
 	cin >> H >> W;
@@ -31,18 +33,28 @@ char GetM(int x,int y)
 
 int called=0;
 
-int dir[4][2]={{-1,0},{1,0},{0,-1},{0,1}};
-void Traverse(int x,int y,int c)
+int mv[4][2] = { {-1,0},{0,1},{1,0},{0,-1} };
+
+void Traverse(int x,int y)
 {
+#ifdef DEBUG
     called ++;
-    cost[y][x] = c;
+#endif
+  
     for(int i=0;i<4;i++)
     {
-        int nx = x+dir[i][0];
-        int ny = y+dir[i][1];
-        if(GetM(nx,ny)!='X' && cost[ny][nx] > c+1)
+        int nx = x+mv[i][0];
+        int ny = y+mv[i][1];
+
+		if (GetM(nx, ny) == 'X') continue;
+		int ncost = cost[y][x] + 1;
+		if(cost[ny][nx] > ncost)
         {
-            Traverse(nx,ny,c+1);
+			cost[ny][nx] = ncost;
+			if (ncost < cost[H - 1][W - 1])
+			{
+				Traverse(nx, ny);
+			}
         }
     }
 }
@@ -55,12 +67,15 @@ int main(){
 	input_data();
 	//	코드를 작성하세요
 
-    Traverse(0,0,0);
+	cost[0][0] = 0;
+    Traverse(0,0);
 
     ans = cost[H-1][W-1];
     if(ans==INT_MAX) ans = -1;
 	cout << ans << endl;
-    //cout << called << endl;
+#ifdef DEBUG
+    cout << called << endl;
+#endif
 	return 0;
 }
 
