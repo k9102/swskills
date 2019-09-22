@@ -83,5 +83,8 @@
     <ClCompile Include="healthystep.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="airpurifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
