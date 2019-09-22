@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <tuple>
 #include <numeric>
+#include <limits.h>
 
 using namespace std;
 
@@ -23,6 +24,18 @@ void Input_Data(void) {
 	}
 }
 
+
+void Input_Data_(void) {
+	int i;
+	N = 50000;
+	S = 5;
+	for (int i = 0; i < N; i++) {
+		C[i] = rand() % 5000 + 1;
+		Y[i] = rand() % 10000;
+	}
+}
+
+
 int main() {
 	long long ans = -1;
 	Input_Data();		// 입력 함수
@@ -32,20 +45,21 @@ int main() {
 
 	for (int i = N - 1; i >= 0; i--)
 	{
-		vector<int> cs(C, C + i + 1);
-		
+		int loc;
+		int min_val = INT_MAX;
 		for (int j = 0; j <= i; j++)
 		{
-			cs[i - j] -= (C[i] - S*j);
+			int v = C[i - j] - (C[i] - S * j);
+			if (min_val > v)
+			{
+				loc = i-j;
+				min_val = v;
+			}
 		}
-
-		auto itr = min_element(begin(cs), end(cs));
-		
-		int loc = distance(begin(cs),itr);
 		val[loc] += C[loc]*Y[i]+(long long)S*Y[i]*(i-loc);
 	}
 	
-	ans = accumulate(begin(val), end(val), 0l);
+	ans = accumulate(begin(val), end(val), (long long)0);
 
 	cout << ans << endl;	// 정답 출력
 	return 0;
