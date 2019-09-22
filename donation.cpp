@@ -28,7 +28,7 @@ int main() {
 
 	sort(A, A + N);
 
-	int lower=0, upper = 1'000'000'100;
+	int lower=0, upper = 1'000'000'000;
 	int mid;
 	long long sum;
 	long long lsum, usum;
