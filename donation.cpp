@@ -28,9 +28,10 @@ int main() {
 
 	sort(A, A + N);
 
-	int lower=0, upper = 1'000'000'000;
+	int lower=0, upper = 1'000'000'100;
 	int mid;
 	long long sum;
+	long long lsum, usum;
 	while (lower+1 < upper)
 	{
 		mid = (lower + upper) / 2;
@@ -40,13 +41,30 @@ int main() {
 		sum	= accumulate(itr,A+N, (long long)0);
 		sum = sum - (long long)mid * distance(itr, A + N);
 
-		if (sum > M) lower = mid; else upper = mid;
+		if (sum >= M)
+		{
+			lsum = sum;
+			lower = mid;
+		}
+		else
+		{
+			usum = sum;
+			upper = mid;
+		}
 	}
 
-	if (sum > M)
-		ans = upper;
-	else
-		ans = lower;
+
+	if (lsum >= M && usum >= M)
+	{
+		ans = max(lower, upper);
+	}
+	else 
+	{
+		if (lsum >= M)
+			ans = lower;
+		else
+			ans = upper;
+	}
 
 
 	cout << ans << endl;	//	정답 출력
@@ -58,4 +76,11 @@ int main() {
 4 42 40 26 46
 
 36
+*/
+
+/*
+10 30
+15 28 9 32 29 7 7 21 8 34
+
+23
 */
