@@ -38,26 +38,26 @@ void Input_Data_(void) {
 
 int main() {
 	long long ans = -1;
-	Input_Data();		// 입력 함수
+	Input_Data_();		// 입력 함수
 
 	// TODO : 코드를 작성하세요
 
 
-	for (int i = N - 1; i >= 0; i--)
+	int min_loc;
+	int min_val = INT_MAX - S;
+
+	for (int i = 0; i < N; i++)
 	{
-		int loc;
-		int min_val = INT_MAX;
-		for (int j = 0; j <= i; j++)
+
+		min_val = min_val + S;
+		if (min_val >= C[i])
 		{
-			int v = C[i - j] - (C[i] - S * j);
-			if (min_val > v)
-			{
-				loc = i-j;
-				min_val = v;
-			}
+			min_val = C[i];
+			min_loc = i;
 		}
-		val[loc] += C[loc]*Y[i]+(long long)S*Y[i]*(i-loc);
+		val[min_loc] += min_val * Y[i];
 	}
+
 	
 	ans = accumulate(begin(val), end(val), (long long)0);
 
