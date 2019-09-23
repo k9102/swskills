@@ -92,5 +92,8 @@
     <ClCompile Include="donation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="staistics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
