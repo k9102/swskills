@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <algorithm>
 using namespace std;
 
 string seed = "1234";
@@ -16,7 +16,7 @@ vector<string> perms;
 /*
 combination
 */
-void Comb(int d,string s)
+void Comb(int d=0,string s="")
 {
 	if (s.size() == r)
 	{
@@ -28,6 +28,24 @@ void Comb(int d,string s)
 		Comb(d + 1, s + seed[d]);
 		Comb(d + 1,s);
 	}
+}
+
+void Comb_()
+{
+	vector<bool> sel(n);
+	fill(end(sel) - r, end(sel), true);
+
+	do {
+		string s;
+		for (int i = 0; i < size(sel); i++)
+		{
+			if (sel[i]) s += seed[i];
+		}
+		coms.push_back(move(s));
+	} while (next_permutation(begin(sel), end(sel)));
+
+
+
 }
 
 /*
@@ -56,9 +74,9 @@ void Perm(int d, string s)
 
 void main()
 {
-	Perm(0, "");
+	Comb_();
 
-	for (auto v : perms)
+	for (auto v : coms)
 	{
 		cout << v << endl;
 	}
