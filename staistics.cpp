@@ -5,13 +5,13 @@
 #include <algorithm>
 using namespace std;
 
-string seed = "1234";
+const string seed = "1234";
 int n = seed.size();
 int r = 3;
 
 vector<bool> smap(n);
-vector<string> coms;
-vector<string> perms;
+vector<string> rets;
+
 
 /*
 combination
@@ -20,7 +20,7 @@ void Comb(int d=0,string s="")
 {
 	if (s.size() == r)
 	{
-		coms.emplace_back(s);
+		rets.emplace_back(s);
 	}
 	else
 	{
@@ -33,7 +33,7 @@ void Comb(int d=0,string s="")
 void Comb_()
 {
 	vector<bool> sel(n);
-	fill(end(sel) - r, end(sel), true);
+	fill(begin(sel), begin(sel)+r, true);
 
 	do {
 		string s;
@@ -41,21 +41,18 @@ void Comb_()
 		{
 			if (sel[i]) s += seed[i];
 		}
-		coms.push_back(move(s));
-	} while (next_permutation(begin(sel), end(sel)));
-
-
-
+		rets.push_back(move(s));
+	} while (prev_permutation(begin(sel), end(sel)));
 }
 
 /*
 permutation
 */
-void Perm(int d, string s)
+void Perm(int d=0, string s="")
 {
 	if (d>=n)
 	{
-		perms.emplace_back(s);
+		rets.emplace_back(s);
 	}
 	else
 	{
@@ -71,12 +68,32 @@ void Perm(int d, string s)
 	}
 }
 
+void Perm_()
+{
+	string s = seed;
+
+	sort(begin(s), end(s));
+
+	do {
+		rets.emplace_back(s);
+	} while (next_permutation(begin(s), end(s)));
+}
+
 
 void main()
 {
-	Comb_();
+	vector<string> rets_;
+	Perm_();
+	rets_ = rets;
+	rets.clear();
+	Perm();
 
-	for (auto v : coms)
+	if (rets_ == rets)
+	{
+		cout << "======" << endl;
+	}
+
+	for (auto v : rets)
 	{
 		cout << v << endl;
 	}
