@@ -95,5 +95,14 @@
     <ClCompile Include="staistics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dataordering.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="newproduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="kimchi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
